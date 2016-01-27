@@ -97,7 +97,7 @@
 - (void)initPillarsLayer {
     for (int i = 1; i <= 30; i++) {
         int viewHeight = CGRectGetHeight(self.view.bounds);
-        int topPillarHeight = (arc4random() % (viewHeight - 200)) + 130;
+        int topPillarHeight = 20 + (arc4random() % (viewHeight - 200));
         int space = 100 + (i * 160);
         int downPillarHeight = topPillarHeight + 150;
 
