@@ -96,25 +96,27 @@
 
 - (void)initPillarsLayer {
     for (int i = 1; i <= 30; i++) {
-        int viewHeight = CGRectGetHeight(self.view.bounds);
-        int topPillarHeight = 20 + (arc4random() % (viewHeight - 200));
-        int space = 100 + (i * 160);
-        int downPillarHeight = topPillarHeight + 150;
+        NSInteger viewHeight = CGRectGetHeight(self.view.bounds);
+        NSInteger topPillarHeight = 20 + (arc4random() % (viewHeight - 200));
+        NSInteger heightGap = topPillarHeight + 150;
+        NSInteger downPillarHeight = viewHeight - heightGap;
+        NSInteger widthGap = 100 + (i * 160);
 
-        CALayer *pillarLayer = [CALayer layer];
-        pillarLayer.backgroundColor = [[UIColor redColor] CGColor];
-        pillarLayer.frame = CGRectMake(space, 0, 60, topPillarHeight);
+        CALayer *topPillarLayer = [CALayer layer];
+        topPillarLayer.backgroundColor = [[UIColor redColor] CGColor];
+        topPillarLayer.frame = CGRectMake(widthGap, 0, 60, topPillarHeight);
 
-        CALayer *pillarLayerDown = [CALayer layer];
-        pillarLayerDown.backgroundColor = [[UIColor redColor] CGColor];
-        pillarLayerDown.frame = CGRectMake(space, downPillarHeight, 60, viewHeight - downPillarHeight);
+        CALayer *downPillarLayer = [CALayer layer];
+        downPillarLayer.backgroundColor = [[UIColor redColor] CGColor];
+        downPillarLayer.frame = CGRectMake(widthGap, heightGap, 60, downPillarHeight);
 
-        [self.view.layer addSublayer:pillarLayer];
-        [self.view.layer addSublayer:pillarLayerDown];
-        [self.pillarsLayerArrays addObject:pillarLayer];
-        [self.pillarsLayerArrays addObject:pillarLayerDown];
+        [self.view.layer addSublayer:topPillarLayer];
+        [self.view.layer addSublayer:downPillarLayer];
+        [self.pillarsLayerArrays addObject:topPillarLayer];
+        [self.pillarsLayerArrays addObject:downPillarLayer];
     }
 }
+
 
 - (void)initAlertAction:(NSString *)message {
     __weak typeof(self) weakSelf = self;
